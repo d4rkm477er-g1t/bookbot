@@ -1,9 +1,16 @@
+## USAGE: RUN python3 main.py <path_to_book>
+##<path_to_book> should be a .txt file
+
+
 from stats import word_quantity
 from stats import count_char
 from stats import list_counts
 from stats import report
+import sys
 
-FILEPATH = "books/frankenstein.txt"
+
+
+
 
 def get_book_text(filepath):
     with open(filepath) as f:
@@ -18,4 +25,14 @@ def main():
     sorts = list_counts(dictionary)
     pretty = report(FILEPATH, quantity, sorts)
     print(pretty)
-main()
+
+
+try:
+    if len(sys.argv) == 2:
+        FILEPATH = sys.argv[1]
+        main()
+    else:
+        raise Exception
+except Exception:
+    print("Usage: python3 main.py <path_to_book>")
+    sys.exit(1)
